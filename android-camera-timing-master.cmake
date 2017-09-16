@@ -31,34 +31,24 @@ set(version        master)
 set(qt_version     5.6.2)
 
 superbuild_package(
-  NAME           openorienteering-mapper
+  NAME           android-camera-timing-pc
   VERSION        ${version}
   DEPENDS
-    gdal
-    libpolyclipping
-    proj
-    qtandroidextras-${qt_version}
     qtbase-${qt_version}
     qtimageformats-${qt_version}
-    qtlocation-${qt_version}
-    qtsensors-${qt_version}
-    qttools-${qt_version}
-    qttranslations-${qt_version}
+	qtserialport-${qt_version}
     zlib
-    host:doxygen
     host:qttools-${qt_version}
   
   SOURCE
-    DOWNLOAD_NAME  openorienteering-mapper_${version}.tar.gz
-    URL            https://github.com/OpenOrienteering/mapper/archive/${version}.tar.gz
+    DOWNLOAD_NAME  android-camera-timing-pc_${version}.tar.gz
+    URL            https://github.com/xc-racer99/android-camera-timing-pc/archive/${version}.tar.gz
   
   BUILD [[
     CMAKE_ARGS
       "-DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE}"
       "-DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}"
       "-DBUILD_SHARED_LIBS=0"
-      "-DMapper_AUTORUN_SYSTEM_TESTS=0"
-      "-DMapper_BUILD_PACKAGE=1"
     $<$<BOOL:${ANDROID}>:
       "-DCMAKE_DISABLE_FIND_PACKAGE_Qt5PrintSupport=TRUE"
       "-DKEYSTORE_URL=${KEYSTORE_URL}"
@@ -71,8 +61,8 @@ superbuild_package(
     INSTALL_COMMAND
       "${CMAKE_COMMAND}" --build . --target install -- VERBOSE=1
       $<$<BOOL:${WIN32}>:
-        # Mapper Windows installation layout is weird
-        "DESTDIR=${INSTALL_DIR}/OpenOrienteering"
+        # Windows installation layout is weird
+        "DESTDIR=${INSTALL_DIR}/CameraTimingAndroid-PC"
       >$<$<NOT:$<BOOL:${WIN32}>>:
         "DESTDIR=${INSTALL_DIR}"
       >
@@ -81,7 +71,7 @@ superbuild_package(
   >
   ]]
   
-  EXECUTABLES src/Mapper
+  EXECUTABLES src/AndroidTimingPC
   
   PACKAGE [[
     COMMAND "${CMAKE_COMMAND}" --build . --target package/fast

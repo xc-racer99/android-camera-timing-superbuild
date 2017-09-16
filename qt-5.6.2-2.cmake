@@ -285,47 +285,6 @@ superbuild_package(
   ]]
 )
 
-# qtlocation
-
-superbuild_package(
-  NAME           qtlocation
-  VERSION        ${version}
-  DEPENDS        qtbase-${version}
-                 qtserialport-${version}
-  
-  SOURCE
-    DOWNLOAD_NAME  qtlocation_${version}.orig.tar.gz
-    URL            ${base_url}/qtlocation-opensource-src-${version}.tar.gz
-    URL_HASH       SHA256=b153a4ab39f85d801699fe8adfa9e36496ecb392d2ded3c28e68a74b1c50e8d8
-    PATCH_COMMAND  "${CMAKE_COMMAND}" -E touch "<SOURCE_DIR>/.git"
-  
-  USING qmake
-  BUILD [[
-    CONFIGURE_COMMAND
-      "${qmake}" "${SOURCE_DIR}"
-  ]]
-)
-
-# qtsensors
-
-superbuild_package(
-  NAME           qtsensors
-  VERSION        ${version}
-  DEPENDS        qtbase-${version}
-  
-  SOURCE
-    DOWNLOAD_NAME  qtsensors_${version}.orig.tar.gz
-    URL            ${base_url}/qtsensors-opensource-src-${version}.tar.gz
-    URL_HASH       SHA256=463e2b3545cb7502bc02401b325557eae6cbf5556a31aba378dfdabd41695917
-    PATCH_COMMAND  "${CMAKE_COMMAND}" -E touch "<SOURCE_DIR>/.git"
-  
-  USING qmake
-  BUILD [[
-    CONFIGURE_COMMAND
-      "${qmake}" "${SOURCE_DIR}"
-  ]]
-)
-
 # qtserialport
 
 superbuild_package(
