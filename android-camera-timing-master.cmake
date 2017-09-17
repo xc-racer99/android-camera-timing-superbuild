@@ -49,15 +49,6 @@ superbuild_package(
       "-DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE}"
       "-DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}"
       "-DBUILD_SHARED_LIBS=0"
-    $<$<BOOL:${ANDROID}>:
-      "-DCMAKE_DISABLE_FIND_PACKAGE_Qt5PrintSupport=TRUE"
-      "-DKEYSTORE_URL=${KEYSTORE_URL}"
-      "-DKEYSTORE_ALIAS=${KEYSTORE_ALIAS}"
-    >
-    $<$<NOT:$<BOOL:${ANDROID}>>:
-      "-DCMAKE_DISABLE_FIND_PACKAGE_Qt5Positioning=TRUE"
-      "-DCMAKE_DISABLE_FIND_PACKAGE_Qt5Sensors=TRUE"
-    >
     INSTALL_COMMAND
       "${CMAKE_COMMAND}" --build . --target install -- VERBOSE=1
       $<$<BOOL:${WIN32}>:
@@ -66,9 +57,6 @@ superbuild_package(
       >$<$<NOT:$<BOOL:${WIN32}>>:
         "DESTDIR=${INSTALL_DIR}"
       >
-  $<$<NOT:$<BOOL:${CMAKE_CROSSCOMPILING}>>:
-    TEST_BEFORE_INSTALL 1
-  >
   ]]
   
   EXECUTABLES src/AndroidTimingPC
