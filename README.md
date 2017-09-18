@@ -1,3 +1,11 @@
+To build Camera Timing for Android - PC for Windows
+
+Create a build directory
+Run `cmake SOURCE_DIR -DENABLE_i686-w64-mingw32=1`
+Run `make android-camera-timing-pc-master-i686-w64-mingw32-package`
+
+Original Readme
+______________________________
 # OpenOrienteering SuperBuild
 
 ## Project goals
