@@ -199,7 +199,6 @@ superbuild_package(
       -no-sql-psql
       -no-sql-sqlite2
       -no-sql-tds
-      -no-openssl
       -no-directfb
       -no-linuxfb
       $<$<OR:${android},${macos},${windows}>:
