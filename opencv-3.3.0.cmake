@@ -1,6 +1,5 @@
-# This file is part of OpenOrienteering.
-
 # Copyright 2016, 2017 Kai Pastor
+# Copyright 2017 Jonathan Bakker
 #
 # Redistribution and use is allowed according to the terms of the BSD license:
 #
@@ -27,42 +26,27 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
 # THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-set(version        master)
-set(qt_version     5.6.2)
+set(version        3.3.0)
+set(download_hash  SHA256=8bb312b9d9fd17336dc1f8b3ac82f021ca50e2034afc866098866176d985adc6)
 
 superbuild_package(
-  NAME           android-camera-timing-pc
+  NAME           opencv
   VERSION        ${version}
-  DEPENDS
-    opencv
-    qtbase-${qt_version}
-    qtimageformats-${qt_version}
-	qtserialport-${qt_version}
-    zlib
-    host:qttools-${qt_version}
   
   SOURCE
-    DOWNLOAD_NAME  android-camera-timing-pc_${version}.tar.gz
-    URL            https://github.com/xc-racer99/android-camera-timing-pc/archive/${version}.tar.gz
-  
+	DOWNLOAD_NAME  opencv-${version}.tar.gz
+	URL            https://github.com/opencv/opencv/archive/${version}.tar.gz
+    URL_HASH       ${download_hash}
+
   BUILD [[
     CMAKE_ARGS
       "-DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE}"
-      "-DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}"
-      "-DBUILD_SHARED_LIBS=0"
+      "-DCMAKE_INSTALL_PREFIX=${INSTALL_DIR}/${CMAKE_INSTALL_PREFIX}"
     INSTALL_COMMAND
-      "${CMAKE_COMMAND}" --build . --target install -- VERBOSE=1
-      $<$<BOOL:${WIN32}>:
-        # Windows installation layout is weird
-        "DESTDIR=${INSTALL_DIR}/CameraTimingAndroid-PC"
-      >$<$<NOT:$<BOOL:${WIN32}>>:
-        "DESTDIR=${INSTALL_DIR}"
-      >
-  ]]
-  
-  EXECUTABLES src/AndroidTimingPC
-  
-  PACKAGE [[
-    COMMAND "${CMAKE_COMMAND}" --build . --target package/fast
+            "${CMAKE_COMMAND}" --build . --target install
+#    COMMAND
+#      "${CMAKE_COMMAND}" -E copy_directory
+#        "${INSTALL_DIR}/../opencv-3.3.0/bin/install"
+#        "${INSTALL_DIR}${CMAKE_INSTALL_PREFIX}/bin"
   ]]
 )
