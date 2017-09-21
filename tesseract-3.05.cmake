@@ -1,6 +1,5 @@
-# This file is part of OpenOrienteering.
-
 # Copyright 2016, 2017 Kai Pastor
+# Copyright 2017 Jonathan Bakker
 #
 # Redistribution and use is allowed according to the terms of the BSD license:
 #
@@ -27,44 +26,51 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
 # THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-set(version        master)
-set(qt_version     5.6.2)
+set(version        3.05.01)
+set(download_hash  SHA256=05898f93c5d057fada49b9a116fc86ad9310ff1726a0f499c3e5211b3af47ec1)
+set(patch_hash     SHA256=93d412db1f75606b646ad9ac29aed2ff75f3b77fd644d463b4372353b0ecdf4d)
 
 superbuild_package(
-  NAME           android-camera-timing-pc
+  NAME      tesseract-patches
+  VERSION   ${version}
+
+  SOURCE
+    DOWNLOAD_NAME  tesseract-patches-${version}.tar.gz
+    URL            https://www.dropbox.com/s/szdgrwaji7r88il/tesserat-3.05.01-patches.tar.gz?dl=1
+    URL_HASH       ${patch_hash}
+)
+
+superbuild_package(
+  NAME           tesseract
   VERSION        ${version}
   DEPENDS
     leptonica
-    tesseract
-    opencv
-    qtbase-${qt_version}
-    qtimageformats-${qt_version}
-	qtserialport-${qt_version}
-    zlib
-    host:qttools-${qt_version}
+    libjpeg
+    libpng
+    source:tesseract-patches-${version}
+    tiff
   
   SOURCE
-    DOWNLOAD_NAME  android-camera-timing-pc_${version}.tar.gz
-    URL            https://github.com/xc-racer99/android-camera-timing-pc/archive/${version}.tar.gz
-  
+    DOWNLOAD_NAME  tesseract-${version}.tar.gz
+	URL            https://codeload.github.com/tesseract-ocr/tesseract/tar.gz/${version}
+    URL_HASH       ${download_hash}
+    PATCH_COMMAND
+      "<SOURCE_DIR>/autogen.sh"
+    COMMAND
+      "${CMAKE_COMMAND}" -Dpackage=tesseract-patches-${version} -P "${APPLY_PATCHES_SERIES}"
+
   BUILD [[
-    CMAKE_ARGS
-      "-DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE}"
-      "-DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}"
-      "-DBUILD_SHARED_LIBS=0"
+    CONFIGURE_COMMAND
+      "PKG_CONFIG_PATH=${INSTALL_DIR}/${CMAKE_INSTALL_PREFIX}/lib/pkgconfig"
+        "CXXFLAGS=-I${INSTALL_DIR}/${CMAKE_INSTALL_PREFIX}/include/leptonica"
+        "${SOURCE_DIR}/configure"
+        "--prefix=${CMAKE_INSTALL_PREFIX}"
+        $<$<BOOL:${CMAKE_CROSSCOMPILING}>:
+          --host=${SUPERBUILD_TOOLCHAIN_TRIPLET}
+        >
+        --with-extra-libraries=${INSTALL_DIR}/${CMAKE_INSTALL_PREFIX}/lib
+        "CFLAGS=$${}{CMAKE_C_FLAGS} $${}{CMAKE_C_FLAGS_$<UPPER_CASE:$<CONFIG>>}"
     INSTALL_COMMAND
-      "${CMAKE_COMMAND}" --build . --target install -- VERBOSE=1
-      $<$<BOOL:${WIN32}>:
-        # Windows installation layout is weird
-        "DESTDIR=${INSTALL_DIR}/CameraTimingAndroid-PC"
-      >$<$<NOT:$<BOOL:${WIN32}>>:
-        "DESTDIR=${INSTALL_DIR}"
-      >
-  ]]
-  
-  EXECUTABLES src/AndroidTimingPC
-  
-  PACKAGE [[
-    COMMAND "${CMAKE_COMMAND}" --build . --target package/fast
+      "$(MAKE)" install "DESTDIR=${INSTALL_DIR}"
   ]]
 )
