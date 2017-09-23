@@ -34,6 +34,7 @@ superbuild_package(
   NAME           android-camera-timing-pc
   VERSION        ${version}
   DEPENDS
+    boost
     leptonica
     tesseract
     opencv
@@ -52,6 +53,7 @@ superbuild_package(
       "-DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE}"
       "-DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}"
       "-DBUILD_SHARED_LIBS=0"
+      "-- -L${INSTALL_DIR}/${CMAKE_INSTALL_PREFIX}/lib"
     INSTALL_COMMAND
       "${CMAKE_COMMAND}" --build . --target install -- VERBOSE=1
       $<$<BOOL:${WIN32}>:
