@@ -26,8 +26,8 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
 # THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-set(version        3.3.0)
-set(download_hash  SHA256=8bb312b9d9fd17336dc1f8b3ac82f021ca50e2034afc866098866176d985adc6)
+set(version        2.4.13.3)
+set(download_hash  SHA256=fb4769d0119c35426c3754b7fb079b407911e863958db53bdec83c7794582e41)
 
 superbuild_package(
   NAME           opencv
@@ -44,9 +44,5 @@ superbuild_package(
       "-DCMAKE_INSTALL_PREFIX=${INSTALL_DIR}/${CMAKE_INSTALL_PREFIX}"
     INSTALL_COMMAND
             "${CMAKE_COMMAND}" --build . --target install
-#    COMMAND
-#      "${CMAKE_COMMAND}" -E copy_directory
-#        "${INSTALL_DIR}/../opencv-3.3.0/bin/install"
-#        "${INSTALL_DIR}${CMAKE_INSTALL_PREFIX}/bin"
   ]]
 )
