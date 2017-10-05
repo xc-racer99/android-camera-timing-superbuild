@@ -44,5 +44,7 @@ superbuild_package(
       "-DCMAKE_INSTALL_PREFIX=${INSTALL_DIR}/${CMAKE_INSTALL_PREFIX}"
     INSTALL_COMMAND
             "${CMAKE_COMMAND}" --build . --target install
+      COMMAND
+        "${CMAKE_COMMAND}" -E copy_directory "${INSTALL_DIR}/${CMAKE_INSTALL_PREFIX}/x86/mingw/bin" "${INSTALL_DIR}/${CMAKE_INSTALL_PREFIX}/bin"
   ]]
 )
