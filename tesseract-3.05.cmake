@@ -28,7 +28,7 @@
 
 set(version        3.05.01)
 set(download_hash  SHA256=05898f93c5d057fada49b9a116fc86ad9310ff1726a0f499c3e5211b3af47ec1)
-set(patch_hash     SHA256=93d412db1f75606b646ad9ac29aed2ff75f3b77fd644d463b4372353b0ecdf4d)
+set(patch_hash     SHA256=90471ee22afa6910954985113e94cb06612dce04be0522061c4494772d16abd5)
 
 superbuild_package(
   NAME      tesseract-patches
@@ -72,5 +72,7 @@ superbuild_package(
         "CFLAGS=$${}{CMAKE_C_FLAGS} $${}{CMAKE_C_FLAGS_$<UPPER_CASE:$<CONFIG>>}"
     INSTALL_COMMAND
       "$(MAKE)" install "DESTDIR=${INSTALL_DIR}"
+      COMMAND
+        "${CMAKE_COMMAND}" -E copy "${SOURCE_DIR}/eng.traineddata" "${INSTALL_DIR}/${CMAKE_INSTALL_PREFIX}/share/tessdata"
   ]]
 )
