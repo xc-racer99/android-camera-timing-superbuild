@@ -42,7 +42,7 @@ superbuild_package(
     qtimageformats-${qt_version}
 	qtserialport-${qt_version}
     zlib
-    host:qttools-${qt_version}
+#    host:qttools-${qt_version}
   
   SOURCE
     DOWNLOAD_NAME  android-camera-timing-pc_${version}.tar.gz
