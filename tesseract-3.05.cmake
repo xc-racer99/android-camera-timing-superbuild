@@ -28,7 +28,7 @@
 
 set(version        3.05.01)
 set(download_hash  SHA256=05898f93c5d057fada49b9a116fc86ad9310ff1726a0f499c3e5211b3af47ec1)
-set(patch_hash     SHA256=90471ee22afa6910954985113e94cb06612dce04be0522061c4494772d16abd5)
+set(patch_hash     SHA256=85d08102388036ac581d7731485134126568c14d50d18da5b10be5e124dc7594)
 
 superbuild_package(
   NAME      tesseract-patches
@@ -36,7 +36,7 @@ superbuild_package(
 
   SOURCE
     DOWNLOAD_NAME  tesseract-patches-${version}.tar.gz
-    URL            https://www.dropbox.com/s/szdgrwaji7r88il/tesserat-3.05.01-patches.tar.gz?dl=1
+    URL            https://www.dropbox.com/s/mlx6rl4wipbbqba/tesseract-3.05.01-patches.tar.gz?dl=1
     URL_HASH       ${patch_hash}
 )
 
@@ -56,8 +56,6 @@ superbuild_package(
     URL_HASH       ${download_hash}
     PATCH_COMMAND
       "<SOURCE_DIR>/autogen.sh"
-    COMMAND
-      "${CMAKE_COMMAND}" -Dpackage=tesseract-patches-${version} -P "${APPLY_PATCHES_SERIES}"
 
   BUILD [[
     CONFIGURE_COMMAND
@@ -72,7 +70,7 @@ superbuild_package(
         "CFLAGS=$${}{CMAKE_C_FLAGS} $${}{CMAKE_C_FLAGS_$<UPPER_CASE:$<CONFIG>>}"
     INSTALL_COMMAND
       "$(MAKE)" install "DESTDIR=${INSTALL_DIR}"
-      COMMAND
-        "${CMAKE_COMMAND}" -E copy "${SOURCE_DIR}/eng.traineddata" "${INSTALL_DIR}/${CMAKE_INSTALL_PREFIX}/share/tessdata"
+    COMMAND
+      "${CMAKE_COMMAND}" -E copy "${SOURCE_DIR}/../tesseract-patches-3.05.01/eng.traineddata" "${INSTALL_DIR}/${CMAKE_INSTALL_PREFIX}/share/tessdata"
   ]]
 )
