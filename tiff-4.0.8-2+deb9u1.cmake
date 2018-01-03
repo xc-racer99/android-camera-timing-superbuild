@@ -54,7 +54,7 @@ superbuild_package(
   VERSION        ${patch_version}
   
   SOURCE
-    URL            http://http.debian.net/debian/pool/main/t/tiff/tiff_${patch_version}.debian.tar.xz
+    URL            http://snapshot.debian.org/archive/debian/20170920T100500Z/pool/main/t/tiff/tiff_${patch_version}.debian.tar.xz
     URL_HASH       ${patch_hash}
 )
   
@@ -68,7 +68,7 @@ superbuild_package(
     zlib
   
   SOURCE
-    URL            http://http.debian.net/debian/pool/main/t/tiff/tiff_${version}.orig.tar.gz
+    URL            http://snapshot.debian.org/archive/debian/20170920T100500Z/pool/main/t/tiff/tiff_${version}.orig.tar.gz
     URL_HASH       ${download_hash}
     PATCH_COMMAND
       "${CMAKE_COMMAND}"

@@ -51,7 +51,7 @@ superbuild_package(
   VERSION        ${patch_version}
   
   SOURCE
-    URL            http://http.debian.net/debian/pool/main/e/expat/expat_${patch_version}.debian.tar.xz
+    URL            http://snapshot.debian.org/archive/debian/20170920T100500Z/pool/main/e/expat/expat_${patch_version}.debian.tar.xz
     URL_HASH       ${patch_hash}
 )
   
@@ -62,7 +62,7 @@ superbuild_package(
     source:expat-patches-${patch_version}
   
   SOURCE
-    URL            http://http.debian.net/debian/pool/main/e/expat/expat_${version}.orig.tar.bz2
+    URL            http://snapshot.debian.org/archive/debian/20170920T100500Z/pool/main/e/expat/expat_${version}.orig.tar.bz2
     URL_HASH       ${download_hash}
     PATCH_COMMAND
       "${CMAKE_COMMAND}"

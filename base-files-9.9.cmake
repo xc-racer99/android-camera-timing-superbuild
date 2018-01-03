@@ -49,7 +49,7 @@ superbuild_package(
   NAME           base-files
   VERSION        ${version}
   SOURCE
-    URL            http://http.debian.net/debian/pool/main/b/base-files/base-files_${version}+${subversion}.tar.xz
+    URL            http://snapshot.debian.org/archive/debian/20170920T100500Z/pool/main/b/base-files/base-files_${version}+${subversion}.tar.xz
     URL_HASH       ${download_hash}
   SOURCE_WRITE
     CMakeLists.txt cmakelists_txt

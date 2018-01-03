@@ -55,7 +55,7 @@ superbuild_package(
   VERSION        ${patch_version}
   
   SOURCE
-    URL            http://http.debian.net/debian/pool/main/x/xz-utils/xz-utils_${patch_version}.debian.tar.xz
+    URL            http://snapshot.debian.org/archive/debian/20170920T100500Z/pool/main/x/xz-utils/xz-utils_${patch_version}.debian.tar.xz
     URL_HASH       ${patch_hash}
     PATCH_COMMAND
       sed -i -e "/liblzma-skip-ABI-incompatible-check-when-liblzma.so.patch/d" patches/series
@@ -73,7 +73,7 @@ superbuild_package(
     common-licenses
   
   SOURCE
-    URL            http://http.debian.net/debian/pool/main/x/xz-utils/xz-utils_${version}.orig.tar.xz
+    URL            http://snapshot.debian.org/archive/debian/20170920T100500Z/pool/main/x/xz-utils/xz-utils_${version}.orig.tar.xz
     URL_HASH       ${download_hash}
     PATCH_COMMAND
       "${CMAKE_COMMAND}"

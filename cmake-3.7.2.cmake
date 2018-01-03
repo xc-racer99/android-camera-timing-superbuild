@@ -49,7 +49,7 @@ superbuild_package(
                  zlib
   
   SOURCE
-    URL            http://http.debian.net/debian/pool/main/c/cmake/cmake_${version}.orig.tar.gz
+    URL            http://snapshot.debian.org/archive/debian/20170920T100500Z/pool/main/c/cmake/cmake_${version}.orig.tar.gz
     URL_HASH       ${download_hash}
   
   USING            USE_SYSTEM_CMAKE
