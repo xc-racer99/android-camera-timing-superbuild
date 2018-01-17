@@ -71,5 +71,9 @@ superbuild_package(
           toolset=gcc-mingw target-os=windows
           --user-config=user-config.jam
         >
+    COMMAND
+      "${CMAKE_COMMAND}" -E copy
+        "${SOURCE_DIR}/LICENSE_1_0.txt"
+        "${INSTALL_DIR}${CMAKE_INSTALL_PREFIX}/share/doc/copyright/boost.txt"
   ]]
 )

@@ -51,5 +51,9 @@ superbuild_package(
       "-DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE}"
     INSTALL_COMMAND
       "${CMAKE_COMMAND}" --build . --target install/strip -- VERBOSE=1 "DESTDIR=${INSTALL_DIR}"
+    COMMAND
+      "${CMAKE_COMMAND}" -E copy
+        "${SOURCE_DIR}/leptonica-license.txt"
+        "${INSTALL_DIR}${CMAKE_INSTALL_PREFIX}/share/doc/copyright/leptonica.txt"
   ]]
 )

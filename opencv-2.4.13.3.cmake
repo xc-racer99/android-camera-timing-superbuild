@@ -46,5 +46,9 @@ superbuild_package(
             "${CMAKE_COMMAND}" --build . --target install
       COMMAND
         "${CMAKE_COMMAND}" -E copy_directory "${INSTALL_DIR}/${CMAKE_INSTALL_PREFIX}/x86/mingw/bin" "${INSTALL_DIR}/${CMAKE_INSTALL_PREFIX}/bin"
+      COMMAND
+      "${CMAKE_COMMAND}" -E copy
+        "${SOURCE_DIR}/LICENSE"
+        "${INSTALL_DIR}${CMAKE_INSTALL_PREFIX}/share/doc/copyright/opencv.txt"
   ]]
 )

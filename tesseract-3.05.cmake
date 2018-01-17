@@ -72,5 +72,9 @@ superbuild_package(
       "$(MAKE)" install "DESTDIR=${INSTALL_DIR}"
     COMMAND
       "${CMAKE_COMMAND}" -E copy "${SOURCE_DIR}/../tesseract-patches-3.05.01/eng.traineddata" "${INSTALL_DIR}/${CMAKE_INSTALL_PREFIX}/share/tessdata"
+    COMMAND
+      "${CMAKE_COMMAND}" -E copy
+        "${SOURCE_DIR}/COPYING"
+        "${INSTALL_DIR}${CMAKE_INSTALL_PREFIX}/share/doc/copyright/tesseract.txt"
   ]]
 )
